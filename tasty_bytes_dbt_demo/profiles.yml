@@ -13,7 +13,7 @@ tasty_bytes:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
-      role: accountadmin
+      role: SYSADMIN
       database: tasty_bytes_dbt_db
       schema: prod
       warehouse: tasty_bytes_dbt_wh
@@ -21,7 +21,7 @@ tasty_bytes:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
-      role: accountadmin
+      role: SYSADMIN
       database: tasty_bytes_dbt_db
       schema: bronze_stg
       warehouse: tasty_bytes_dbt_wh
@@ -29,7 +29,7 @@ tasty_bytes:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
-      role: accountadmin
+      role: SYSADMIN
       database: tasty_bytes_dbt_db
       schema: bronze_raw
       warehouse: tasty_bytes_dbt_wh
@@ -37,7 +37,7 @@ tasty_bytes:
       type: snowflake
       account: 'not needed'
       user: 'not needed'
-      role: accountadmin
+      role: SYSADMIN
       database: tasty_bytes_dbt_db
       schema: silver_cleansing
       warehouse: tasty_bytes_dbt_wh
