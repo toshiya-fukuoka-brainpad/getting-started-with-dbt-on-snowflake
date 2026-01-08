@@ -44,4 +44,7 @@
 
   {% endfor %}
 
+  　  -- ログの書き込みを確定させる（念のための処理）
+  {% do run_query("COMMIT;") %}
+
 {% endmacro %}
