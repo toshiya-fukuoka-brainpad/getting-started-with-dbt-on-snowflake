@@ -1,11 +1,16 @@
 {% macro on_run_end(results) %}
-
+  -- 実行ユーザーが書き込み権限を持っているか、実行時にロールが正しいか確認してください
   {% set run_id = invocation_id %}
   {% set target_name = target.name %}
 
   {% for r in results %}
-
-    {% set error_msg = r.message if r.status != 'success' else none %}
+    -- エラーメッセージの取得と整形
+    -- 1. メッセージがない場合はNone
+    -- 2. メッセージがある場合は、SQL壊れを防ぐためにドル記号($)を除去し、先頭1000文字にカット（念のため）
+    {% set error_msg = none %}
+    {% if r.status != 'success' and r.message %}
+      {% set error_msg = r.message | replace('$', '') | truncate(1000) %}
+    {% endif %}
 
     {% set sql %}
       INSERT INTO TASTY_BYTES_DBT_DB.MONITORING.DBT_RUN_RESULTS
@@ -33,18 +38,19 @@
         '{{ r.status }}',
         {{ r.execution_time | default(0) }},
         {% if error_msg %}
-          $$ {{ error_msg | replace("'", "''") }} $$
+          -- ドル引用符($$)を使うことで、メッセージ内のシングルクォートによる構文エラーを回避
+          $$ {{ error_msg }} $$
         {% else %}
           NULL
         {% endif %}
       );
     {% endset %}
 
+    -- クエリの実行
     {% do run_query(sql) %}
-
   {% endfor %}
 
-  　  -- ログの書き込みを確定させる（念のための処理）
+  -- ログの書き込みを確定させる（念のための処理）
   {% do run_query("COMMIT;") %}
 
 {% endmacro %}
