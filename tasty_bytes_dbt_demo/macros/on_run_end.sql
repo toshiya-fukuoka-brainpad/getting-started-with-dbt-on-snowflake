@@ -8,7 +8,7 @@
     {% set error_msg = r.message if r.status != 'success' else none %}
 
     {% set sql %}
-      INSERT INTO MONITORING.DBT_RUN_RESULTS
+      INSERT INTO TASTY_BYTES_DBT_DB.MONITORING.DBT_RUN_RESULTS
       (
         RUN_ID,
         RUN_AT,
