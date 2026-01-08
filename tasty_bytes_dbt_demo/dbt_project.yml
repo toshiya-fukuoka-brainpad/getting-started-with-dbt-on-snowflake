@@ -12,6 +12,10 @@ seed-paths: [seeds]
 macro-paths: [macros]
 snapshot-paths: [snapshots]
 
+## Hooks (ここに追加)
+on-run-end:
+  - "{{ on_run_end(results) }}"
+
 ## Target
 target-path: target
 clean-targets: [target, dbt_modules]
@@ -24,6 +28,3 @@ models:
     marts:
       +materialized: table
 
-## Macros
-on-run-end:
-  - "{{ on_run_end(results) }}"
