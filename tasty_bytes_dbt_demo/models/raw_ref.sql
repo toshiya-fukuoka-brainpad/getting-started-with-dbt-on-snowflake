@@ -2,8 +2,9 @@
     materialized='incremental',
     database='BRONZE',
     schema='RAW',
-    alias='T_JYUTYU'
+    alias='T_JYUTYU',
+    incremental_strategy='append'
 ) }}
 
 SELECT *
-FROM BRONZE.STG.JYUTYU
+FROM BRONZE.STG.T_JYUTYU
