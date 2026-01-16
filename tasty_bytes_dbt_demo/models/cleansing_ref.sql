@@ -1,7 +1,7 @@
 {{ config(
     materialized='incremental',
-    database='TASTY_BYTES_DBT_DB',
-    schema='silver_cleansing',
+    database='SILVER',
+    schema='CLN',
     alias='T_JYUTYU',
     unique_key=['JYUTYU_KEY', 'ANKEN_NO']
 ) }}
@@ -17,7 +17,7 @@ SELECT
     SYU_KOUJI_NO,
     TO_NUMBER(KOUJI_KEY)               AS KOUJI_KEY,
     SEIHIN_BUNRUI_CD,
-    KEIYAKUU_NAIYOU_KBN_CD,
+    KEIYAKU_NAIYOU_KBN_CD,
 
     -- 11 - 20
     SENKOU_BUNRUI_CD,
@@ -79,6 +79,11 @@ SELECT
     TO_NUMBER(JYUTYU_KINGAKU_100)                  AS JYUTYU_KINGAKU_100,
     TO_NUMBER(SYOUHI_ZEI_100)                      AS SYOUHI_ZEI_100,
     TO_NUMBER(JYUTYU_KINGAKU_ZEIKOMI_100)          AS JYUTYU_KINGAKU_ZEIKOMI_100,
+    METADATA_FILENAME                              AS METADATA_FILENAME ,
+    METADATA_FILE_ROW_NUMBER                       AS METADATA_FILE_ROW_NUMBER,
+    METADATA_FILE_CONTENT_KEY                      AS METADATA_FILE_CONTENT_KEY,
+    METADATA_FILE_LAST_MODIFIED                    AS METADATA_FILE_LAST_MODIFIED,
+    METADATA_START_SCAN_TIME                       AS METADATA_START_SCAN_TIME ,
 
     -- 管理列
     INGEST_TIMESTAMP,
