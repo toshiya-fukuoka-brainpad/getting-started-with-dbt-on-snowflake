@@ -1,9 +1,9 @@
 {{ config(
     materialized='incremental',
-    database='TASTY_BYTES_DBT_DB',
-    schema='BRONZE_RAW',
+    database='BRONZE',
+    schema='RAW',
     alias='T_JYUTYU'
 ) }}
 
 SELECT *
-FROM {{ ref('stg_ref') }}
+FROM BRONZE.STG.JYUTYU
