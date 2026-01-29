@@ -28,18 +28,5 @@ models:
     marts:
       +materialized: table
 
-## log
-query-comment:
-  comment: |
-    {
-      "run_id": "{{ env_var('DBT_CLOUD_RUN_ID', 'manual') }}",
-      "node_name": "{{ model.name }}",
-      "resource_type": "{{ node.resource_type }}",
-      "target": "{{ target.name }}",
-      "database": "{{ target.database }}",
-      "schema": "{{ target.schema }}",
-      "run_started_at": "{{ run_started_at }}"
-    }
-  append: true
 
 
