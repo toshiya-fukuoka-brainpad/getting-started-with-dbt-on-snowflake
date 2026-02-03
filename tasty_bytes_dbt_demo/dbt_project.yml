@@ -25,10 +25,9 @@ models:
   tasty_bytes:
     staging:
       +materialized: view
+        +tags: "test_build"
     marts:
       +materialized: table
-    oracle_datetime_test: # モデル名を指定
-        +tags: "oracle"     # このモデルだけに付与
 
 
 
