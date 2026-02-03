@@ -1,4 +1,3 @@
-tags=['oracle', 'incremental']
 {{ config(
     materialized='incremental',
     database='SILVER',
