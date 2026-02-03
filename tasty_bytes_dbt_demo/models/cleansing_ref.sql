@@ -3,7 +3,8 @@
     database='SILVER',
     schema='CLN',
     alias='T_JYUTYU',
-    unique_key=['JYUTYU_KEY', 'ANKEN_NO']
+    unique_key=['JYUTYU_KEY', 'ANKEN_NO'],
+    tags=['silver']
 ) }}
 
 SELECT
