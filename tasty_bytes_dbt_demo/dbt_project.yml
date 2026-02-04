@@ -21,8 +21,7 @@ target-path: target
 clean-targets: [target, dbt_modules]
 
 models:
-  tasty_bytes_dbt_demo:
-    staging:
-      +tags: ['staging']
-    marts:
-      +tags: ['model']
+  staging:
+    +tags: ['staging']
+  marts:
+    +tags: ['model']
