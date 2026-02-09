@@ -1,4 +1,11 @@
 {% macro setup_keiyaku_policy() %}
+{{
+  config(
+    meta={
+      'tags': ['keiyaku', 'security']
+    }
+  )
+}}
 
 -- DB / Schema を target から自動取得
 {% set db = target.database %}
