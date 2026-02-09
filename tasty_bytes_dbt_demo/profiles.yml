@@ -41,3 +41,11 @@ tasty_bytes:
       database: tasty_bytes_dbt_db
       schema: silver_cleansing
       warehouse: tasty_bytes_dbt_wh
+    test_anken:
+      type: snowflake
+      account: 'not needed'
+      user: 'not needed'
+      role: SYSADMIN     # ポリシー作成権限が必要なため強めのロールを推奨
+      database: SILVER   # テスト専用のDB名
+      schema: CLN  # テスト専用のスキーマ名
+      warehouse: tasty_bytes_dbt_wh
