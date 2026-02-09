@@ -2,7 +2,7 @@
     materialized='table',
     cluster_by=['ANKEN_NO'],
     post_hook=[
-      "{{ setup_keiyaku_policy() }}"
+      "{{ post_hook_keiyaku_policy() }}"
     ]
 ) }}
 
