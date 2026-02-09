@@ -7,4 +7,4 @@
 ) }}
 
 SELECT *
-FROM {{ target.database }}.{{ target.schema }}.T_ANKEN_SOURCE
+FROM {{ target.database }}.{{ target.schema }}.T_ANKEN
