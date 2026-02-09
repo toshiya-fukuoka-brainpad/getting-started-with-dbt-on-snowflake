@@ -1,5 +1,14 @@
 {% macro setup_keiyaku_policy() %}
+{{
+  config(
+    meta={
+      'tags': ['keiyaku', 'security']
+    }
+  )
+}}
 
+-- マクロの処理を書く
+{% endmacro %}
 -- DB / Schema を target から自動取得
 {% set db = target.database %}
 {% set sc = target.schema %}
