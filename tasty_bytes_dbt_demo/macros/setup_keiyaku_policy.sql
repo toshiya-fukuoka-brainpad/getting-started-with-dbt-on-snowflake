@@ -1,4 +1,4 @@
-{% macro setup_keiyaku_policy_and_cluster() %}
+{% macro setup_keiyaku_policy() %}
 {% if execute %}
 
   {# 実行環境情報の取得 #}
