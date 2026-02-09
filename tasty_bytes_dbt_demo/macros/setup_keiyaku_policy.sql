@@ -1,8 +1,14 @@
 {% macro setup_keiyaku_policy() %}
 
-{# 1. 現在のデータベースとスキーマをコンテキストから取得 #}
+{# target.database は profiles の database (SILVER) を参照します #}
 {% set current_db = target.database %}
-{% set current_schema = schema %}
+
+{# target.schema は profiles の schema (CLN) を参照します #}
+{# もし dbt_project.yml でスキーマを上書きしている場合は {{ schema }} が適切です #}
+{% set current_schema = target.schema %}
+
+-- デバッグ用にログを出力（dbt run 時に確認可能）
+{% do log("Running policy macro on: " ~ current_db ~ "." ~ current_schema, info=True) %}
 
 {# 2. メモイザブル関数の作成 #}
 CREATE OR REPLACE FUNCTION {{ current_db }}.{{ current_schema }}.get_keiyaku_anken_array()
@@ -19,8 +25,8 @@ AS (val_ANKEN_NO VARCHAR) RETURNS BOOLEAN ->
   ARRAY_CONTAINS(val_ANKEN_NO::VARIANT, {{ current_db }}.{{ current_schema }}.get_keiyaku_anken_array());
 
 {# 4. ポリシーを T_ANKEN に適用 #}
-{# ※ 既に適用されている場合にエラーにならないよう一度削除してから追加するのが安全です #}
-ALTER TABLE {{ ref('T_ANKEN') }} DROP ROW ACCESS POLICY filter_by_T_KEIYAKU;
+{# refを使用することで、dbtが依存関係を解決した正しいテーブル名を自動取得します #}
+ALTER TABLE {{ ref('T_ANKEN') }} DROP ROW ACCESS POLICY IF EXISTS {{ current_db }}.{{ current_schema }}.filter_by_T_KEIYAKU;
 ALTER TABLE {{ ref('T_ANKEN') }} ADD ROW ACCESS POLICY {{ current_db }}.{{ current_schema }}.filter_by_T_KEIYAKU ON (ANKEN_NO);
 
 {% endmacro %}
